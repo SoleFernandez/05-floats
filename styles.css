@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    border: 1px solid red;
+    overflow: hidden;
+    background-color: #eaedf0;
+
+    /* Remember that the default block-rendering behavior is for elements to fill the width of their container. */
+
+    /* We still need the overflow: hidden line to force the .container to pay attention to the height of the floated elements. Without it, we wouldn’t see our background color because .container would have zero height. */
+}
+
+
+.page {
+    width: 900px;
+    margin: 0 auto;
+    /* Centering requires an explicit width property. */
+
+    border: 1px solid red;
+
+    /* By adding an overflow: hidden declaration to a container div, we’re telling it to recognize the height of any floated elements it contains. */
+
+    /* overflow: hidden;   Clearing with parent element */
+    /* background-color: #eaedf0; */
+
+}
+.menu {
+    height: 100px;
+    background-color: #b2d6ff;  /* Medium blue */
+}
+
+.sidebar {
+
+        /* However, this doesn’t just align the sidebar—it also tells surrounding elements that they can flow around the sidebar instead of beginning underneath it. It’s as if the sidebar is inside the .content block, so any HTML markup in .content would wrap around the sidebar’s box. */
+
+    float: left;  
+    width: 200px;
+    height: 300px;
+    background-color: #f09a9d; /* Red */
+    /* float: right;      Right-aligned 
+    float: none;     Revert to default flow */
+
+    /* We now have all the tools necessary to align block-level elements: floats for left/right alignment and auto-margins for center alignment. Remember that this only applies to block boxes. Inline boxes are aligned with the text-align property */
+
+}
+
+/* To summarize, when you have an extra unfloated HTML element at the bottom of a container div, use the clear solution. Otherwise, add an overflow: hidden declaration to the container element. The underlying idea for both options is that you need a way to tell the browser to incorporate floats into the height of their container element in order for their backgrounds to show up. */
+
+.content {
+    float: left;
+    width: 650px;
+    height: 500px;
+    background-color: #f5cf8e;  /* Yellow */
+
+    /* When you float multiple elements in the same direction, they’ll stack horizontally, much like the default vertical layout algorithm, except rotated 90 degrees. */
+    padding: 20px;
+}
+
+/* You probably noticed that our footer shows up in the top right, directly below .menu. That’s because floated boxes are removed from the normal flow of the page. The height of our floated elements don’t contribute to the vertical position of the footer, so it simply sticks itself below the last element that wasn’t floated. */
+
+/* Notice how the border is only around the .menu and .footer elements. It’s as if the floated elements weren’t even there. There are two ways to fix this: clearing a float and hiding overflow. */
+
+
+.footer {
+    border: solid 1px red;
+    /* Instead of flowing around the floated box, a cleared element always appears after any floats. It’s like forcing a box back into the default vertical flow of the page. */
+    /* clear: both; Clering with child element
+    height: 200px; */
+
+    /* Let’s replace the footer’s explicit height with another overflow: hidden so it can accommodate any number of grid items */
+    overflow: hidden;
+    background-color: #d6e9fe; /* Light blue */
+}
+
+.column {
+    /* When you float multiple elements in the same direction, they’ll stack horizontally, much like the default vertical layout algorithm, except rotated 90 degrees. */
+    float: left;
+    width: 31%;
+    margin: 20px 1.15%;
+    height: 160px;
+    background-color: #b2d6ff;  /* Medium blue */
+
+    /* When there isn’t enough room to stack a floated element horizontally, it pops down to the next line. */
+}
+
+/* Remember that flexbox is a more modern way to create these kinds of layouts. */
+
+.article-image {
+    float: left;
+    width: 300px;
+    height: 200px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.avatar {
+    border: solid 1px red;
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin: 25px;
+    border-radius: 40px;
+    background-color: #d6e9fe;
+}
+
+.username {
+    margin-top: 30px;
+}
+
+.comment {
+    margin: 10px;
+    overflow: hidden;  /* This is important */
+
+    /* In other words, overflow: hidden breaks the magazine-style layout from the previous section, but in a very useful way. */
+}
+
+/* Our recommendation is to use flexbox to lay out your web pages as much as possible, reserving floats for when you need text to flow around a box (i.e., a magazine-style layout) or when you need to support legacy web browsers. */
